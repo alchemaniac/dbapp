@@ -40,4 +40,4 @@ def index():
 	return render_template('index.html',pname=pname,pid=pid)
 
 if __name__ == "__main__":
-	app.run(host="localhost")
+	app.run(host="0.0.0.0")
