@@ -3,25 +3,25 @@ import mysql.connector
 
 app = Flask(__name__)
 
-mydb = mysql.connector.connect(
-  host="egress-1",
-  user="super",
-  password="mysql12345"
-)
-
-mycursor = mydb.cursor()
-try:
-	mycursor.execute("CREATE DATABASE mydatabase")
-except:
-	print('db exists')
-mycursor.execute("USE mydatabase")
-try:
-	mycursor.execute("CREATE TABLE somedata (name VARCHAR(255), id VARCHAR(255))")
-except:
-	print('table exists')
-query = """INSERT INTO somedata VALUES (%s, %s) """
 @app.route('/',methods=['GET','POST'])
 def index():
+	mydb = mysql.connector.connect(
+		host="egress-1",
+  		user="super",
+  		password="mysql12345"
+		)
+
+	mycursor = mydb.cursor()
+	try:
+		mycursor.execute("CREATE DATABASE mydatabase")
+	except:
+		print('db exists')
+	mycursor.execute("USE mydatabase")
+	try:
+		mycursor.execute("CREATE TABLE somedata (name VARCHAR(255), id VARCHAR(255))")
+	except:
+		print('table exists')
+	query = """INSERT INTO somedata VALUES (%s, %s) """
 	if request.method=="POST":
 		details=request.form
 		tname=details['name']
